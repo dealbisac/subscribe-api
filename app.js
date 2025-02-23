@@ -1,5 +1,7 @@
 import express from "express";
 
+import { PORT } from './config/env.js';
+
 //  1. Initialize the app
 const app = express();
 
@@ -11,8 +13,8 @@ app.get('/', (req, res) => {
 
 
 // 3. Make your app expose to port
-app.listen(3000, () => {
-    console.log('Subscription API is running on port http://localhost:3000')
+app.listen(PORT, () => {
+    console.log(`Subscription API is running on port http://localhost:${PORT}`);
 })
 
 // 4. Export the app
