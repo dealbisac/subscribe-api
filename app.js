@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 
 import { PORT } from './config/env.js';
 
@@ -7,15 +8,24 @@ import authRouter from './routes/auth.routes.js';
 import subscriptionRouter from './routes/subscription.routes.js';
 
 import connectToDatabase from "./database/mongodb.js";
+import errorMiddleware from "./middlewares/error.middleware.js";
 
 
 //  1. Initialize the app
 const app = express();
 
+//Default Middlewares we need in the app
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
 // Use the routes.
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/subscriptions', subscriptionRouter);
+
+// Error middleware
+app.use(errorMiddleware);
 
 
 // 2. Create your route
