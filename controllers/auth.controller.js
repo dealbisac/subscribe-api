@@ -27,8 +27,10 @@ export const signUp = async (req, res, next) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
+        // Create Users
         const newUsers = await User.create([{ name, email, password: hashedPassword}], {session});
 
+        // Update the token
         const token = jwt.sign({userId: newUsers[0]._id, JWT_SECRET, JWT_EXPIRES_IN});
         
         await session.commitTransaction();
