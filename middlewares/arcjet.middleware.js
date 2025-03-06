@@ -1,0 +1,1 @@
+import aj from '../config/arcjet.js'
