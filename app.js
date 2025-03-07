@@ -9,6 +9,7 @@ import subscriptionRouter from './routes/subscription.routes.js';
 
 import connectToDatabase from "./database/mongodb.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
+import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 
 
 //  1. Initialize the app
@@ -18,6 +19,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(arcjetMiddleware);
 
 // Use the routes.
 app.use('/api/v1/users', userRouter);
