@@ -1,4 +1,4 @@
-import arcjet, { shield, detectBot, tokenBucket } from "arcjet";
+import arcjet, { shield, detectBot, tokenBucket } from "@arcjet/node";
 import { ARCJET_KEY } from "./env.js";
 
 const aj = arcjet({
@@ -14,8 +14,6 @@ const aj = arcjet({
         // Block all bots except the following
         allow: [
           "CATEGORY:SEARCH_ENGINE", // Google, Bing, etc
-          // Uncomment to allow these other common bot categories
-          // See the full list at https://arcjet.com/bot-list
           //"CATEGORY:MONITOR", // Uptime monitoring services
           //"CATEGORY:PREVIEW", // Link previews e.g. Slack, Discord
         ],
