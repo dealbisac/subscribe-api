@@ -36,3 +36,18 @@ export const createUser = async (req, res, next) => {
         next(error);
     }
 }
+
+export const updateUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if(!user) {
+            const error = new Error('Problem with updating the user.');
+            error.status = 404;
+            throw error;
+        }
+        res.status(200).json({ success: true, data: user });
+        
+    } catch (error) {
+        next(error);
+    }
+}
