@@ -13,6 +13,21 @@ export const createSubscription = async (req, res, next) => {
     }
 }
 
+export const updateSubscription = async (req, res, next) => {
+    try {
+        const subscription = await Subscription.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if(!subscription) {
+            const error = new Error('Problem with updating the subscription.');
+            error.status = 404;
+            throw error;
+        }
+        res.status(200).json({ success: true, data: subscription });
+        
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const getUserSubscription = async (req, res, next) => {
     try {
         //Check if the user is the same as the one in the token
